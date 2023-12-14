@@ -1,0 +1,36 @@
+.start-play{
+    background-color: blue;
+    color: white;
+    height: 50px;
+    border: 1px solid blue;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 50%;
+}
+.cell{
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:1px solid black;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: gray;
+    color: brown;
+}
+.hard{
+    width: 10%;
+}
+.normal{
+    width: calc( 100% / 9 );
+}
+.easy{
+    width: calc( 100% / 7 );
+}
+.cell-active{
+    color: blueviolet;
+    background-color: lightcyan;
+}
+.cell-bomb{
+    background-color: red;
+}
