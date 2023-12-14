@@ -13,7 +13,7 @@
 let start = false;
 // creata una flag che mi servirà da interrutore per attivare e disattivafre le condizione nel mio ciclo
 
-
+let punteggio = 0;
 
 let newGame = document.getElementById('newgame');
 newGame .addEventListener('click', function(){
@@ -23,6 +23,17 @@ newGame .addEventListener('click', function(){
     let option = 49;
     let classe = 'easy';
 
+    // le due variabili qui sopra indicano rispettivamente le classi del css creata per variare il numero di celle in base alla difficoltà
+
+    if ( difficult == 'hard'){
+        option = 100
+        classe = 'hard';
+    }
+
+    else if ( difficult == 'normal'){
+        option = 81
+        classe = 'normal';
+    }
     let bomb = [];
 
     for (let i = 0; i < 16; i++) {
@@ -36,17 +47,6 @@ newGame .addEventListener('click', function(){
     bomb.push(randomBomb);
     console.log(randomBomb)
     }
-    // le due variabili qui sopra indicano rispettivamente le classi del css creata per variare il numero di celle in base alla difficoltà
-
-    if ( difficult == 'hard'){
-        option = 100
-        classe = 'hard';
-    }
-
-    else if ( difficult == 'normal'){
-        option = 81
-        classe = 'normal';
-    }
 
     if ( start == false ){
         start = true; 
@@ -59,13 +59,17 @@ newGame .addEventListener('click', function(){
             // creo un elemnto div e ci appendo le classi creata nel css che si vedranno solo ed esculisavamte con l'elemnto click
             cell.addEventListener('click', function(){
                 if(bomb.includes(parseInt(cell.innerHTML))){
+                    start = false;
                     cell.classList.add('cell-bomb')
-                    alert('hai perso')
+                    // document.getElementById('result').innerHTML = ('hai perso')
                 } 
                 else{
                     cell.classList.add('cell-active')
-                }
-                
+                    if (punteggio == (option - 16)){                  
+                    punteggio ++
+                    document.getElementById('result').innerHTML = punteggio
+                    }
+                }               
                 // aggiungo eventoi click sulle celle create in precedenza e assegno una nuova classe che mi farà cambiare colore al momento del click su di esse
             })  
         }
