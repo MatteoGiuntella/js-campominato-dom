@@ -10,7 +10,7 @@
 
 // 3- quando l'utente clicca sulla cella cambia colore e stampa il numero in console
 
-let start = false;
+let start = true;
 // creata una flag che mi servirà da interrutore per attivare e disattivafre le condizione nel mio ciclo
 
 let punteggio = 0;
@@ -48,8 +48,6 @@ newGame .addEventListener('click', function(){
     console.log(randomBomb)
     }
 
-    if ( start == false ){
-        start = true; 
         for (let i = 1; i <= option; i++) {
 
             let cell = document.createElement('div');
@@ -58,26 +56,29 @@ newGame .addEventListener('click', function(){
             document.getElementById("my-container-cell").append(cell); 
             // creo un elemnto div e ci appendo le classi creata nel css che si vedranno solo ed esculisavamte con l'elemnto click
             cell.addEventListener('click', function(){
-                if(bomb.includes(parseInt(cell.innerHTML))){
+
+                if(start === false) {
+                    alert('gioco stoppato, punteggio = ' + punteggio);
+                    return;
+                }
+                if(bomb.includes(parseInt(this.innerHTML))){
                     start = false;
-                    cell.classList.add('cell-bomb')
-                    // document.getElementById('result').innerHTML = ('hai perso')
+                    this.classList.add('cell-bomb')
                 } 
                 else{
-                    cell.classList.add('cell-active')
-                    if (punteggio == (option - 16)){                  
-                    punteggio ++
-                    document.getElementById('result').innerHTML = punteggio
+                    this.classList.add('cell-active')
+                    punteggio++;
+                    console.log('punteggio ', punteggio)
+                    console.log('option ', option)
+                    if (punteggio == (option - 16)){         
+                        console.log('hai vinto');           
+                    
+                        document.getElementById('result').innerHTML = punteggio
                     }
                 }               
                 // aggiungo eventoi click sulle celle create in precedenza e assegno una nuova classe che mi farà cambiare colore al momento del click su di esse
             })  
         }
-    }
-    else{
-        start = false;
-        document.getElementById("my-container-cell").innerHTML = '';
-    }
     // con questo ramo della condizione faccio in modo che se viene ricliccato il bottone non aggiungerà alte celle ma resetterà la pagina allo stato iniziale  
 })
 
